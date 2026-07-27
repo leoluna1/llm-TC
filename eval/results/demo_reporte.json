@@ -1,0 +1,226 @@
+{
+  "summary": {
+    "timestamp": "2026-05-19T22:43:05.503868",
+    "total_cases": 11,
+    "successful": 3,
+    "errors": 8,
+    "global_score": 0.836,
+    "pass_rate": 1.0,
+    "by_type": {
+      "analysis": {
+        "mean": 0.84,
+        "min": 0.84,
+        "max": 0.84,
+        "count": 1,
+        "pass_rate": 1.0
+      },
+      "qa": {
+        "mean": 0.834,
+        "min": 0.834,
+        "max": 0.834,
+        "count": 2,
+        "pass_rate": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "demo_analisis",
+      "type": "analysis",
+      "document": "eval/docs/demo_tos.txt",
+      "score": 0.84,
+      "latency_ms": 25711,
+      "json": {
+        "score": 1.0,
+        "valid": true,
+        "missing_fields": [],
+        "issues": [],
+        "clause_count": 9
+      },
+      "sections": {
+        "score": 1.0,
+        "found": [
+          "Resumen ejecutivo",
+          "Recomendaciones"
+        ],
+        "missing": [],
+        "headers_detected": [
+          "Análisis: TestApp",
+          "Resumen ejecutivo",
+          "Hallazgos críticos",
+          "Hallazgos de riesgo alto",
+          "Hallazgos de riesgo medio",
+          "Hallazgos de bajo riesgo",
+          "Jurisdicción y ley aplicable",
+          "Recomendaciones"
+        ]
+      },
+      "clauses": {
+        "score": 0.7,
+        "detection_rate": 1.0,
+        "level_accuracy": 0.0,
+        "details": [
+          {
+            "keyword": "arbitraje",
+            "expected_level": "high",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          },
+          {
+            "keyword": "modificaci",
+            "expected_level": "medium",
+            "detected": true,
+            "actual_level": "high",
+            "level_match": false
+          },
+          {
+            "keyword": "datos",
+            "expected_level": "medium",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          },
+          {
+            "keyword": "limitaci",
+            "expected_level": "high",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          }
+        ]
+      },
+      "risk_level": {
+        "score": 0.5,
+        "predicted": "critical",
+        "expected": "high",
+        "exact": false,
+        "distance": 1
+      },
+      "judge_analysis": {
+        "completitud": 5,
+        "precision": 5,
+        "utilidad": 5,
+        "coherencia": 5,
+        "promedio": 5.0,
+        "razonamiento": "El análisis identifica y explica exhaustivamente todas las cláusulas problemáticas del documento con precisión legal, proporciona contexto sobre por qué cada una es perjudicial, mantiene coherencia entre hallazgos y calificación de riesgo crítico, y ofrece conclusiones accionables para la toma de decisiones del usuario.",
+        "score": 1.0,
+        "error": false
+      },
+      "judge_risk_just": {
+        "justificado": false,
+        "confianza": 0,
+        "nivel_esperado": "?",
+        "razonamiento": "Error en evaluación",
+        "score": 0.0,
+        "error": true
+      }
+    },
+    {
+      "id": "demo_qa_arbitraje",
+      "type": "qa",
+      "document": "eval/docs/demo_tos.txt",
+      "question": "¿Puedo demandar a TestApp en un tribunal normal?",
+      "response_preview": "No, no podés demandar a TestApp en un tribunal normal.\n\nSegún la **Sección 2 (Arbitraje Obligatorio)**:\n\n> Cualquier disputa entre vos y TestApp se resolverá exclusivamente mediante arbitraje vinculan",
+      "score": 0.834,
+      "latency_ms": 2429,
+      "keywords": {
+        "score": 0.667,
+        "found": [
+          "arbitraje",
+          "tribunal"
+        ],
+        "missing": [
+          "renuncia"
+        ]
+      },
+      "judge_qa": {
+        "relevancia": 5,
+        "precision": 5,
+        "claridad": 5,
+        "fundamento": 5,
+        "promedio": 5.0,
+        "razonamiento": "La respuesta es directa, precisa y bien fundamentada en la cláusula 2 del documento; explica claramente las implicaciones legales de la cláusula de arbitraje obligatorio sin agregar información externa ni ambigüedades.",
+        "score": 1.0,
+        "error": false
+      }
+    },
+    {
+      "id": "demo_qa_datos",
+      "type": "qa",
+      "document": "eval/docs/demo_tos.txt",
+      "question": "¿Mis datos se comparten con terceros?",
+      "response_preview": "Sí, tus datos se comparten con terceros.\n\nSegún la **Sección 4 - DATOS PERSONALES**:\n\n> Compartimos estos datos con socios comerciales y terceros para publicidad.\n\nEspecíficamente, TestApp recopila:\n-",
+      "score": 0.834,
+      "latency_ms": 1538,
+      "keywords": {
+        "score": 0.667,
+        "found": [
+          "datos",
+          "tercer"
+        ],
+        "missing": [
+          "compartir"
+        ]
+      },
+      "judge_qa": {
+        "relevancia": 5,
+        "precision": 5,
+        "claridad": 5,
+        "fundamento": 5,
+        "promedio": 5.0,
+        "razonamiento": "La respuesta es directa, precisa y completamente fundamentada en el documento, extrayendo textualmente la información relevante de la Sección 4 y presentándola de forma clara y accesible para cualquier usuario.",
+        "score": 1.0,
+        "error": false
+      }
+    },
+    {
+      "id": "tc_01_alto_riesgo",
+      "type": "analysis",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_alto_riesgo.txt",
+      "score": 0.0
+    },
+    {
+      "id": "tc_02_riesgo_critico",
+      "type": "analysis",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_critico.txt",
+      "score": 0.0
+    },
+    {
+      "id": "tc_03_riesgo_medio",
+      "type": "analysis",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_medio_riesgo.txt",
+      "score": 0.0
+    },
+    {
+      "id": "qa_01_arbitraje",
+      "type": "qa",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_alto_riesgo.txt",
+      "score": 0.0
+    },
+    {
+      "id": "qa_02_datos",
+      "type": "qa",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_alto_riesgo.txt",
+      "score": 0.0
+    },
+    {
+      "id": "qa_03_modificaciones",
+      "type": "qa",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_alto_riesgo.txt",
+      "score": 0.0
+    },
+    {
+      "id": "qa_04_cancelacion",
+      "type": "qa",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_medio_riesgo.txt",
+      "score": 0.0
+    },
+    {
+      "id": "qa_05_jurisdiccion",
+      "type": "qa",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_critico.txt",
+      "score": 0.0
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "summary": {
+    "timestamp": "2026-05-19T22:46:29.197556",
+    "total_cases": 5,
+    "successful": 2,
+    "errors": 3,
+    "global_score": 0.567,
+    "pass_rate": 0.5,
+    "by_type": {
+      "analysis": {
+        "mean": 0.567,
+        "min": 0.333,
+        "max": 0.8,
+        "count": 2,
+        "pass_rate": 0.5
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "adobe_analisis",
+      "type": "analysis",
+      "document": "eval/docs/adobe.pdf",
+      "score": 0.333,
+      "latency_ms": 42391,
+      "json": {
+        "score": 0.0,
+        "valid": false,
+        "missing_fields": [
+          "service_name",
+          "risk_level_overall",
+          "risk_summary",
+          "clauses",
+          "quick_verdict"
+        ],
+        "clause_count": 0,
+        "issues": [
+          "risk_data es None"
+        ]
+      },
+      "sections": {
+        "score": 1.0,
+        "found": [
+          "Resumen ejecutivo",
+          "Recomendaciones",
+          "Jurisdicción"
+        ],
+        "missing": [],
+        "headers_detected": [
+          "Análisis: Adobe Creative Cloud y Servicios Digitales",
+          "Resumen ejecutivo",
+          "Hallazgos críticos",
+          "Hallazgos de riesgo alto",
+          "Hallazgos de riesgo medio",
+          "Hallazgos de bajo riesgo",
+          "Jurisdicción y ley aplicable",
+          "Recomendaciones"
+        ]
+      },
+      "clauses": {
+        "score": 0.0,
+        "detection_rate": 0.0,
+        "level_accuracy": 0.0,
+        "details": [
+          {
+            "keyword": "arbitraje",
+            "detected": false,
+            "actual_level": null
+          },
+          {
+            "keyword": "licencia",
+            "detected": false,
+            "actual_level": null
+          },
+          {
+            "keyword": "datos",
+            "detected": false,
+            "actual_level": null
+          },
+          {
+            "keyword": "modific",
+            "detected": false,
+            "actual_level": null
+          },
+          {
+            "keyword": "responsabilidad",
+            "detected": false,
+            "actual_level": null
+          }
+        ]
+      },
+      "risk_level": null,
+      "judge_analysis": null,
+      "judge_risk_just": null
+    },
+    {
+      "id": "demo_analisis",
+      "type": "analysis",
+      "document": "eval/docs/demo_tos.txt",
+      "score": 0.8,
+      "latency_ms": 0,
+      "json": {
+        "score": 1.0,
+        "valid": true,
+        "missing_fields": [],
+        "issues": [],
+        "clause_count": 9
+      },
+      "sections": {
+        "score": 1.0,
+        "found": [
+          "Resumen ejecutivo",
+          "Recomendaciones"
+        ],
+        "missing": [],
+        "headers_detected": [
+          "Análisis: TestApp",
+          "Resumen ejecutivo",
+          "Hallazgos críticos",
+          "Hallazgos de riesgo alto",
+          "Hallazgos de riesgo medio",
+          "Hallazgos de bajo riesgo",
+          "Jurisdicción y ley aplicable",
+          "Recomendaciones"
+        ]
+      },
+      "clauses": {
+        "score": 0.7,
+        "detection_rate": 1.0,
+        "level_accuracy": 0.0,
+        "details": [
+          {
+            "keyword": "arbitraje",
+            "expected_level": "high",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          },
+          {
+            "keyword": "modificaci",
+            "expected_level": "medium",
+            "detected": true,
+            "actual_level": "high",
+            "level_match": false
+          },
+          {
+            "keyword": "datos",
+            "expected_level": "medium",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          },
+          {
+            "keyword": "limitaci",
+            "expected_level": "high",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          }
+        ]
+      },
+      "risk_level": {
+        "score": 0.5,
+        "predicted": "critical",
+        "expected": "high",
+        "exact": false,
+        "distance": 1
+      },
+      "judge_analysis": null,
+      "judge_risk_just": null
+    },
+    {
+      "id": "tc_01_alto_riesgo",
+      "type": "analysis",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_alto_riesgo.txt",
+      "score": 0.0
+    },
+    {
+      "id": "tc_02_riesgo_critico",
+      "type": "analysis",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_critico.txt",
+      "score": 0.0
+    },
+    {
+      "id": "tc_03_riesgo_medio",
+      "type": "analysis",
+      "error": "Documento no encontrado: /Users/leito/Desktop/proyectos/proyecto_tesis/eval/docs/documento_medio_riesgo.txt",
+      "score": 0.0
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "summary": {
+    "timestamp": "2026-05-19T22:56:22.680722",
+    "total_cases": 4,
+    "successful": 4,
+    "errors": 0,
+    "global_score": 0.768,
+    "pass_rate": 0.75,
+    "by_type": {
+      "qa": {
+        "mean": 0.717,
+        "min": 0.575,
+        "max": 0.875,
+        "count": 3,
+        "pass_rate": 0.667
+      },
+      "analysis": {
+        "mean": 0.922,
+        "min": 0.922,
+        "max": 0.922,
+        "count": 1,
+        "pass_rate": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "adobe_analisis",
+      "type": "analysis",
+      "document": "eval/docs/adobe.pdf",
+      "score": 0.922,
+      "latency_ms": 58139,
+      "json": {
+        "score": 1.0,
+        "valid": true,
+        "missing_fields": [],
+        "issues": [],
+        "clause_count": 20
+      },
+      "sections": {
+        "score": 1.0,
+        "found": [
+          "Resumen ejecutivo",
+          "Recomendaciones",
+          "Jurisdicción"
+        ],
+        "missing": [],
+        "headers_detected": [
+          "Análisis: Adobe Creative Cloud y Servicios Digitales",
+          "Resumen ejecutivo",
+          "Hallazgos críticos",
+          "Hallazgos de riesgo alto",
+          "Hallazgos de riesgo medio",
+          "Hallazgos de bajo riesgo",
+          "Jurisdicción y ley aplicable",
+          "Recomendaciones"
+        ]
+      },
+      "clauses": {
+        "score": 0.76,
+        "detection_rate": 1.0,
+        "level_accuracy": 0.2,
+        "details": [
+          {
+            "keyword": "arbitraje",
+            "expected_level": "high",
+            "detected": true,
+            "actual_level": "high",
+            "level_match": true
+          },
+          {
+            "keyword": "licencia",
+            "expected_level": "medium",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          },
+          {
+            "keyword": "datos",
+            "expected_level": "medium",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          },
+          {
+            "keyword": "modific",
+            "expected_level": "medium",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          },
+          {
+            "keyword": "responsabilidad",
+            "expected_level": "high",
+            "detected": true,
+            "actual_level": "critical",
+            "level_match": false
+          }
+        ]
+      },
+      "risk_level": {
+        "score": 1.0,
+        "predicted": "high",
+        "expected": "high",
+        "exact": true
+      },
+      "judge_analysis": {
+        "completitud": 4,
+        "precision": 4,
+        "utilidad": 5,
+        "coherencia": 4,
+        "promedio": 4.25,
+        "razonamiento": "El análisis identifica correctamente cláusulas críticas de riesgo (arbitraje, eliminación de contenido, limitación de responsabilidad) con fundamentación sólida y recomendaciones prácticas, aunque omite algunos detalles sobre jurisdicción específica y no profundiza en ciertas cláusulas de modificación unilateral mencionadas pero no desarrolladas.",
+        "score": 0.85,
+        "error": false
+      },
+      "judge_risk_just": {
+        "justificado": false,
+        "confianza": 4,
+        "nivel_esperado": "critical",
+        "razonamiento": "El análisis detecta múltiples cláusulas CRITICAL (licencia universal sobre contenido, eliminación sin compensación, renuncia total de responsabilidad) que justificarían clasificación CRITICAL, no HIGH; además, varias cláusulas listadas (licencia en nube, eliminación de contenido, control corporativo de cuenta) no aparecen en el fragmento proporcionado, lo que sugiere análisis especulativo o basado en información externa no verificable en el documento.",
+        "score": 0.35,
+        "error": false
+      }
+    },
+    {
+      "id": "adobe_qa_datos",
+      "type": "qa",
+      "document": "eval/docs/adobe.pdf",
+      "question": "¿Adobe puede acceder al contenido de mis archivos?",
+      "response_preview": "# Adobe y el acceso a tu contenido\n\nSí, Adobe puede acceder a tu contenido, pero con límites específicos según dónde esté almacenado:\n\n## Contenido local (en tu dispositivo)\nAdobe **NO accede** a arch",
+      "score": 0.7,
+      "latency_ms": 6109,
+      "keywords": {
+        "score": 1.0,
+        "found": [
+          "contenido",
+          "archivo",
+          "acceso",
+          "licencia"
+        ],
+        "missing": []
+      },
+      "judge_qa": {
+        "relevancia": 2,
+        "precision": 1,
+        "claridad": 4,
+        "fundamento": 1,
+        "promedio": 2.0,
+        "razonamiento": "La respuesta es clara pero fundamentalmente problemática: el fragmento proporcionado NO contiene información sobre acceso a contenido local, escaneo de IA, análisis de archivos ni políticas de privacidad de contenido en la nube. El sistema inventó prácticamente toda la respuesta, citando fragmentos que no existen en el documento suministrado, lo que constituye alucinación grave en un contexto legal donde la precisión es crítica.",
+        "score": 0.4,
+        "error": false
+      }
+    },
+    {
+      "id": "adobe_qa_arbitraje",
+      "type": "qa",
+      "document": "eval/docs/adobe.pdf",
+      "question": "¿Puedo demandar a Adobe en un tribunal si tengo un problema?",
+      "response_preview": "# Sobre demandar a Adobe en tribunal\n\nNo, en la mayoría de los casos **no podés demandar a Adobe en un tribunal regular**. Las condiciones establecen que debés resolver conflictos mediante arbitraje.\n",
+      "score": 0.875,
+      "latency_ms": 5455,
+      "keywords": {
+        "score": 1.0,
+        "found": [
+          "arbitraje",
+          "tribunal",
+          "disputa",
+          "demanda"
+        ],
+        "missing": []
+      },
+      "judge_qa": {
+        "relevancia": 5,
+        "precision": 3,
+        "claridad": 5,
+        "fundamento": 2,
+        "promedio": 3.75,
+        "razonamiento": "La respuesta es clara y relevante, pero contiene información no presente en el fragmento proporcionado (demandas colectivas, medidas cautelares, derecho de exclusión de 30 días) que no aparecen en el contexto disponible, lo que reduce significativamente su precisión y fundamento documental.",
+        "score": 0.75,
+        "error": false
+      }
+    },
+    {
+      "id": "adobe_qa_cancelacion",
+      "type": "qa",
+      "document": "eval/docs/adobe.pdf",
+      "question": "¿Qué pasa con mis archivos si cancelo la suscripción de Adobe?",
+      "response_preview": "# ¿Qué pasa con tus archivos si cancelás tu suscripción?\n\nSegún el documento, esto es lo que sucede:\n\n## Período de transición (30 días)\n\n> Al final del período de su licencia, haremos todos los esfue",
+      "score": 0.575,
+      "latency_ms": 4715,
+      "keywords": {
+        "score": 0.75,
+        "found": [
+          "cancelar",
+          "archivo",
+          "suscripci"
+        ],
+        "missing": [
+          "acceso"
+        ]
+      },
+      "judge_qa": {
+        "relevancia": 1,
+        "precision": 1,
+        "claridad": 5,
+        "fundamento": 1,
+        "promedio": 2.0,
+        "razonamiento": "La respuesta es completamente fabricada: el fragmento proporcionado NO contiene información sobre qué sucede con los archivos al cancelar, períodos de transición, eliminación de contenido ni recomendaciones de descarga. El sistema inventó citas textuales que no existen en el documento, lo que constituye una alucinación grave en un contexto legal donde la precisión es crítica.",
+        "score": 0.4,
+        "error": false
+      }
+    }
+  ]
+}

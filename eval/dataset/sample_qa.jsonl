@@ -1,0 +1,25 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Casos de prueba para PREGUNTAS Y RESPUESTAS (Q&A)
+#
+# Formato de cada línea:
+# {
+#   "id": "identificador único",
+#   "type": "qa",
+#   "document_path": "ruta al documento",
+#   "question": "pregunta que haría un usuario",
+#   "expected_keywords": ["palabras", "que", "deben", "aparecer", "en", "la", "respuesta"],
+#   "judge_criteria": "descripción de qué hace una buena respuesta (para LLM-judge)"
+# }
+#
+# expected_keywords: bastan con raíces de palabras, p.ej. "modifi" cubre "modificar"/"modificación"
+# ─────────────────────────────────────────────────────────────────────────────
+
+{"id": "qa_01_arbitraje", "type": "qa", "document_path": "eval/docs/documento_alto_riesgo.txt", "question": "¿Puedo demandar a la empresa en un tribunal ordinario si tengo un conflicto?", "expected_keywords": ["arbitraje", "tribunal", "disputa"], "judge_criteria": "La respuesta debe explicar claramente si hay cláusula de arbitraje obligatorio y qué implica para el usuario"}
+
+{"id": "qa_02_datos", "type": "qa", "document_path": "eval/docs/documento_alto_riesgo.txt", "question": "¿Qué datos personales recopilan y con quién los comparten?", "expected_keywords": ["datos", "recopil", "tercer"], "judge_criteria": "La respuesta debe mencionar qué tipos de datos se recopilan y si se comparten con terceros"}
+
+{"id": "qa_03_modificaciones", "type": "qa", "document_path": "eval/docs/documento_alto_riesgo.txt", "question": "¿Pueden cambiar los términos sin avisarme?", "expected_keywords": ["modifi", "notificaci", "aviso"], "judge_criteria": "La respuesta debe indicar si la empresa puede modificar los términos unilateralmente y cómo notifica"}
+
+{"id": "qa_04_cancelacion", "type": "qa", "document_path": "eval/docs/documento_medio_riesgo.txt", "question": "¿Bajo qué condiciones pueden cancelar mi cuenta?", "expected_keywords": ["cancelar", "terminar", "cuenta", "suspender"], "judge_criteria": "La respuesta debe listar las causales por las que pueden cancelar o suspender la cuenta del usuario"}
+
+{"id": "qa_05_jurisdiccion", "type": "qa", "document_path": "eval/docs/documento_critico.txt", "question": "¿Qué ley aplica a este contrato y dónde se resuelven los conflictos?", "expected_keywords": ["ley", "jurisdicción", "tribunal", "estado"], "judge_criteria": "La respuesta debe indicar la ley aplicable (país/estado) y el foro de resolución de disputas"}

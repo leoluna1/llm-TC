@@ -1,0 +1,30 @@
+# Entornos virtuales
+.venv/
+.venv_new/
+venv/
+llm-terms-analyzer/
+env/
+
+# Variables de entorno / secretos
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Datos generados en tiempo de ejecución (no forman parte del código)
+cache/
+uploads/
+ltm_sessions.db
+
+# macOS
+.DS_Store
+
+# Editor / tooling local
+.claude/
+.vscode/
+.idea/

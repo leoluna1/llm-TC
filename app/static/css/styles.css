@@ -1,0 +1,192 @@
+/* Estilos generales */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: none;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del chat */
+.chat-container {
+    height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.message {
+    margin-bottom: 1rem;
+    max-width: 80%;
+    clear: both;
+}
+
+.message-user {
+    float: right;
+    background-color: #d1e7ff;
+    border-radius: 1rem 0 1rem 1rem;
+    padding: 0.75rem 1rem;
+}
+
+.message-assistant {
+    float: left;
+    background-color: #f1f3f4;
+    border-radius: 0 1rem 1rem 1rem;
+    padding: 0.75rem 1rem;
+}
+
+.message-content {
+    word-wrap: break-word;
+}
+
+.message-timestamp {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+/* Estilos para el análisis del documento */
+.analysis-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.analysis-content h1, 
+.analysis-content h2, 
+.analysis-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.analysis-content ul, 
+.analysis-content ol {
+    padding-left: 1.5rem;
+}
+
+.analysis-content blockquote {
+    border-left: 4px solid #007bff;
+    padding-left: 1rem;
+    margin-left: 0;
+    color: #495057;
+}
+
+/* Estilos para los estados del documento */
+.badge.bg-info {
+    background-color: #0dcaf0 !important;
+}
+
+.badge.bg-success {
+    background-color: #198754 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+/* Animación de carga */
+.loading-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 0.15rem solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border .75s linear infinite;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .chat-container {
+        height: 300px;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+}
+
+/* Transiciones y animaciones */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para resaltar los códigos */
+pre {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+
+code {
+    color: #d63384;
+    background-color: rgba(214, 51, 132, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+}
+
+/* Mejoras de accesibilidad */
+:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Estilos para tablas en el análisis */
+.analysis-content table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+.analysis-content th,
+.analysis-content td {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.analysis-content th {
+    background-color: #f8f9fa;
+    text-align: left;
+}
+
+/* Estilos para las listas de cláusulas */
+.clause-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.clause-item {
+    padding: 0.75rem 1rem;
+    border-left: 3px solid #007bff;
+    background-color: #f8f9fa;
+    margin-bottom: 0.5rem;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.clause-item-important {
+    border-left-color: #dc3545;
+}
+
+.clause-item-warning {
+    border-left-color: #ffc107;
+}
+
+.clause-item-positive {
+    border-left-color: #198754;
+}

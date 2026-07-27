@@ -1,0 +1,28 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Casos de prueba para ANÁLISIS DE DOCUMENTOS
+#
+# Formato de cada línea:
+# {
+#   "id": "identificador único",
+#   "type": "analysis",
+#   "document_path": "ruta al documento (relativa al proyecto o absoluta)",
+#   "expected": {
+#     "risk_level": "critical|high|medium|low",   ← riesgo que esperás ver
+#     "required_sections": [...],                  ← secciones que debe tener el análisis
+#     "expected_clauses": [                        ← cláusulas que DEBEN detectarse
+#       {"keyword": "palabra clave en la cláusula", "level": "critical|high|medium|low"}
+#     ]
+#   }
+# }
+#
+# INSTRUCCIONES:
+# 1. Copiá tus documentos de prueba a eval/docs/ (créá esa carpeta)
+# 2. Anotá el nivel de riesgo que esperás para cada documento
+# 3. Listá las cláusulas más importantes que el sistema debe detectar
+# ─────────────────────────────────────────────────────────────────────────────
+
+{"id": "tc_01_alto_riesgo", "type": "analysis", "document_path": "eval/docs/documento_alto_riesgo.txt", "expected": {"risk_level": "high", "required_sections": ["Resumen ejecutivo", "Hallazgos", "Recomendaciones", "Jurisdicción"], "expected_clauses": [{"keyword": "arbitraje", "level": "high"}, {"keyword": "modificaci", "level": "medium"}, {"keyword": "datos personales", "level": "medium"}]}}
+
+{"id": "tc_02_riesgo_critico", "type": "analysis", "document_path": "eval/docs/documento_critico.txt", "expected": {"risk_level": "critical", "required_sections": ["Resumen ejecutivo", "Hallazgos críticos", "Recomendaciones"], "expected_clauses": [{"keyword": "renuncia", "level": "critical"}, {"keyword": "arbitraje", "level": "high"}, {"keyword": "responsabilidad", "level": "high"}]}}
+
+{"id": "tc_03_riesgo_medio", "type": "analysis", "document_path": "eval/docs/documento_medio_riesgo.txt", "expected": {"risk_level": "medium", "required_sections": ["Resumen ejecutivo", "Recomendaciones"], "expected_clauses": [{"keyword": "terminaci", "level": "medium"}, {"keyword": "privacidad", "level": "medium"}]}}
