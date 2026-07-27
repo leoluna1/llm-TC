@@ -1,5 +1,9 @@
 // ── Globals ───────────────────────────────────────────────────────────────────
 let currentSessionId = null;
+// Se incrementa cada vez que se inicia la carga de un documento/sesión distinta.
+// Permite que una cadena de polling vieja (de un documento ya abandonado) se
+// reconozca a sí misma como obsoleta y no pise el estado del documento actual.
+let sessionLoadToken = 0;
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
 const uploadForm        = document.getElementById('uploadForm');
@@ -310,6 +314,8 @@ async function loadHistory() {
                 : `<span class="clause-dot" style="background:var(--gray-300)" aria-hidden="true"></span>`;
 
             const name = item.service_name || item.file_name || '—';
+            const riskLabel = { critical: 'riesgo crítico', high: 'riesgo alto', medium: 'riesgo medio', low: 'riesgo bajo' }[item.risk_level_overall];
+            el.setAttribute('aria-label', `Abrir documento: ${name}${riskLabel ? ` (${riskLabel})` : ''}`);
             el.innerHTML = `${levelDot}<span class="clause-name" title="${escapeHtml(item.file_name)}">${escapeHtml(name)}</span>`;
             el.addEventListener('click', () => restoreSession(item.session_id, item.file_name));
             historyList.appendChild(el);
@@ -321,6 +327,7 @@ async function loadHistory() {
 }
 
 async function restoreSession(sessionId, fileName) {
+    const myToken = ++sessionLoadToken;
     currentSessionId = sessionId;
     documentName.textContent = fileName || 'Documento';
     updateHeaderChip(fileName, true);
@@ -328,7 +335,7 @@ async function restoreSession(sessionId, fileName) {
     switchTab('chat');
     initChat(sessionId);
     showToast('info', `Sesión restaurada: ${fileName}`);
-    pollAnalysisStatus();
+    pollAnalysisStatus(myToken);
 }
 
 // ── Upload ────────────────────────────────────────────────────────────────────
@@ -369,6 +376,7 @@ async function handleDocumentUpload(e) {
         const result = await response.json();
 
         if (result.success) {
+            const myToken = ++sessionLoadToken;
             currentSessionId = result.document_id;
             documentName.textContent = file.name;
             updateHeaderChip(file.name, true);
@@ -380,7 +388,7 @@ async function handleDocumentUpload(e) {
             initChat(currentSessionId);
             switchTab('chat');
             showToast('success', 'Documento subido. Analizando con IA…');
-            pollAnalysisStatus();
+            pollAnalysisStatus(myToken);
         } else {
             showToast('error', result.message || 'Error al subir el documento');
         }
@@ -393,12 +401,41 @@ async function handleDocumentUpload(e) {
 }
 
 // ── Poll analysis status ──────────────────────────────────────────────────────
-async function pollAnalysisStatus() {
-    if (!currentSessionId) return;
+// `token` identifica a qué carga de sesión pertenece este ciclo de polling.
+// Si el usuario cambió de documento mientras esta petición estaba en vuelo,
+// `token` ya no coincide con `sessionLoadToken` y el resultado se descarta
+// en silencio (evita toasts duplicados y que se pise el documento actual).
+// `attempt` cuenta los reintentos: si el análisis nunca se completa (falló o
+// se perdió del lado del servidor) dejamos de insistir en vez de reintentar
+// cada 4s para siempre sin avisarle nada al usuario.
+const MAX_POLL_ATTEMPTS = 20; // ~80s de espera total, tiempo de sobra para un análisis normal
+async function pollAnalysisStatus(token, attempt = 0) {
+    if (!currentSessionId || token !== sessionLoadToken) return;
+    const sessionAtRequestTime = currentSessionId;
+
+    if (attempt >= MAX_POLL_ATTEMPTS) {
+        const statusEl = document.getElementById('statusText');
+        if (statusEl) statusEl.textContent = 'Error';
+        documentStatus.className = 'doc-badge badge-error';
+        documentStatus.innerHTML = '<span class="badge-dot"></span><span id="statusText">Error</span>';
+        showToast('error', 'No se pudo completar el análisis de este documento. Probá subirlo de nuevo.');
+        const analysisPanel = document.getElementById('documentSummary');
+        if (analysisPanel) {
+            analysisPanel.innerHTML = `
+                <div class="content-empty">
+                    <div class="content-empty-icon" aria-hidden="true">⚠️</div>
+                    <h3>No se pudo analizar este documento</h3>
+                    <p>El análisis no se completó. Esto puede pasar si el documento es muy antiguo o si ocurrió un error en el servidor. Subí el documento de nuevo para intentarlo otra vez.</p>
+                </div>`;
+        }
+        return;
+    }
 
     try {
-        const response = await fetch(`/api/document/${currentSessionId}`);
+        const response = await fetch(`/api/document/${sessionAtRequestTime}`);
         const result   = await response.json();
+
+        if (token !== sessionLoadToken) return; // superado por una carga más nueva mientras esperábamos
 
         if (result.success && result.summary && result.summary !== 'El análisis aún no está disponible') {
             // Analysis ready
@@ -429,7 +466,7 @@ async function pollAnalysisStatus() {
         console.error('Error al verificar estado:', err);
     }
 
-    setTimeout(pollAnalysisStatus, 4000);
+    setTimeout(() => pollAnalysisStatus(token, attempt + 1), 4000);
 }
 
 // ── View analysis ─────────────────────────────────────────────────────────────
